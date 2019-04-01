@@ -1,0 +1,36 @@
+<html>
+    <link href="//www.un.org/depts/dhl/css/sc-table.css" rel="stylesheet" type="text/css" />
+
+    <table class="tablefont" summary="The table has five columns and should be read per row. The first column indicate the document 
+symbol of the meeting record, which is linked to the actual document in PDF format. 
+The second column shows the date of the meeting, the third column is the symbol of the press release issued on the meeting. 
+The fourth column provides information on the subject of the meeting. And finally the fifth column gives details of the action 
+taken with links provided to the actual document in PDF format if a presidential statement has been issued or a resolution adopted.">
+
+    <tr>
+        <th colspan="5" class="tbltitle">Meetings conducted  by the Security Council in {{ year }}<br/>
+            (in reverse chronological order)</th>
+        </tr>
+        <tr>
+          <th width="15%">Meeting<br />
+          Record</th>
+          <th width="15%">Date</th>
+          <th width="30%">Topic</th>
+          <th width="25%">Security Council<br> Outcome / Vote</th> 
+    </tr>
+
+
+    {% for result in results %} 
+    <tr>
+        <td><a target="_top" href="https://undocs.org/en/{{ result["meetingRecord"] }}">{{ result["meetingRecord"] }}</a></td>
+        <td>{{ result["date"] }} </td>
+        <td>{{ result["topic"] }} </td>
+        <td>{%- if result["outcome"] -%}<a target="_top" href="https://undocs.org/en/{{ result["outcome"] }}">{{ result["outcome"] }}</a> <br> {{ result["vote"] }}
+            {%- else -%} -- {%- endif -%}  
+        </td>
+    </tr>
+    {% endfor %} 
+   
+
+    </table>
+</html>
